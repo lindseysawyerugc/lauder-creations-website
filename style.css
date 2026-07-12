@@ -274,6 +274,9 @@ button { font-family: inherit; }
   font-size: clamp(0.95rem, 2vw, 1.15rem);
   color: var(--cream);
 }
+@media (min-width: 600px) {
+  .hero-tagline { max-width: none; white-space: nowrap; }
+}
 .hero-ctas {
   display: flex;
   gap: 1rem;
@@ -539,14 +542,19 @@ button { font-family: inherit; }
 /* ============ Feedback ============ */
 .feedback { padding: 5rem 0; background: var(--cream); }
 .feedback h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin-bottom: 3rem; }
-.testimonial-grid { display: grid; gap: 2.5rem; }
-.testimonial-card { text-align: center; }
+.testimonial-grid { display: grid; gap: 2.5rem; align-items: stretch; }
+.testimonial-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
 .quote-row {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   max-width: 560px;
   margin: 0 auto;
+  flex: 1;
 }
 .laurel { flex-shrink: 0; width: 26px; height: 68px; color: var(--brown); }
 .laurel-flip { transform: scaleX(-1); }
