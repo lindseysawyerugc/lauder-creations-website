@@ -330,7 +330,7 @@ button { font-family: inherit; }
 .why-me-grid {
   display: grid;
   gap: 1.5rem;
-  margin-top: 4rem;
+  margin-bottom: 3.5rem;
 }
 .why-me-grid h2 { font-size: clamp(2rem, 5vw, 3rem); }
 .why-me-text p { color: #333; }
@@ -338,7 +338,7 @@ button { font-family: inherit; }
   .why-me-grid { grid-template-columns: 0.9fr 1.5fr; gap: 3rem; align-items: start; }
 }
 
-.storytelling-section { margin-top: 0; }
+.storytelling-section { margin-top: 4rem; }
 
 /* Infinite auto-rotating category carousel — several cards visible at once,
    image + title below each (like the original cards), loops forever in both
