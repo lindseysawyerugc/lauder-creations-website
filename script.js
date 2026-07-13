@@ -16,26 +16,6 @@ document.addEventListener('pointerdown', () => {
   bgVideos.forEach(video => { if (video.paused) video.play().catch(() => {}); });
 }, { once: true, capture: true });
 
-// Section dot stepper — highlights whichever section is currently crossing
-// the vertical center of the screen as you scroll.
-const sectionDots = Array.from(document.querySelectorAll('.section-dots a'));
-if (sectionDots.length && 'IntersectionObserver' in window) {
-  const dotObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const dot = sectionDots.find(a => a.getAttribute('href') === `#${entry.target.id}`);
-      if (!dot) return;
-      sectionDots.forEach(d => d.classList.remove('active'));
-      dot.classList.add('active');
-    });
-  }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-
-  sectionDots.forEach(a => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) dotObserver.observe(target);
-  });
-}
-
 // Floating "Work With Me" button — appears once you've scrolled past the
 // hero (where its own CTA already lives), and hides again once the contact
 // section (which has its own button) comes into view.
