@@ -1,5 +1,21 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Background videos (hero, work-together banner) — some mobile browsers
+// silently ignore the autoplay HTML attribute and just show a paused frame
+// with their own default play button. Force it via JS, muted, and retry on
+// the visitor's first tap as a guaranteed fallback (a user gesture always
+// unblocks video.play()).
+const bgVideos = document.querySelectorAll('.hero-video, .banner-video');
+bgVideos.forEach(video => {
+  video.muted = true;
+  const tryPlay = () => video.play().catch(() => {});
+  tryPlay();
+  video.addEventListener('loadeddata', tryPlay, { once: true });
+});
+document.addEventListener('pointerdown', () => {
+  bgVideos.forEach(video => { if (video.paused) video.play().catch(() => {}); });
+}, { once: true, capture: true });
+
 // Section dot stepper — highlights whichever section is currently crossing
 // the vertical center of the screen as you scroll.
 const sectionDots = Array.from(document.querySelectorAll('.section-dots a'));
