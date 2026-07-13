@@ -743,6 +743,63 @@ button { font-family: inherit; }
   background: var(--cream);
 }
 
+/* ============ Section dot stepper ============ */
+/* Desktop-only wayfinding: a normal scroll, plus a quick-jump side nav that
+   tracks which section you're currently viewing. Hidden on tablet/phone
+   where screen width is too tight for it to earn its keep. */
+.section-dots {
+  display: none;
+  position: fixed;
+  right: 1.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 300;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+@media (min-width: 1080px) {
+  .section-dots { display: flex; }
+}
+.section-dots a {
+  position: relative;
+  display: block;
+  width: 12px;
+  height: 12px;
+}
+.section-dots a span {
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: rgba(10, 23, 4, 0.28);
+  transition: background 0.25s ease, transform 0.25s ease, inset 0.25s ease;
+}
+.section-dots a:hover span,
+.section-dots a.active span {
+  background: var(--gold);
+  inset: 0;
+}
+.section-dots a::before {
+  content: attr(data-label);
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--near-black);
+  color: var(--white);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  padding: 0.35em 0.8em;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.section-dots a:hover::before { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .section-dots a span { transition: none; }
+}
+
 /* ============ Floating CTA ============ */
 .floating-cta {
   position: fixed;
