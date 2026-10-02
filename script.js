@@ -66,7 +66,7 @@ siteNav.querySelectorAll('a').forEach(link => {
   });
 });
 
-// Portfolio videos play inline in the phone frame.
+// Portfolio videos play inline in their phone frame or UGC card.
 // Desktop/tablet: tap the play button, it plays once with sound, then resets.
 // Phone (swipe carousel): whichever card is centered auto-plays muted & looping,
 // like scrolling through reels — swiping to the next resets the last one and
@@ -90,11 +90,11 @@ document.addEventListener('pointerdown', () => {
 function resetVideo(video) {
   video.pause();
   video.currentTime = 0;
-  video.closest('.phone-screen').classList.remove('is-playing');
+  video.closest('.phone-screen, .ugc-media').classList.remove('is-playing');
 }
 
 function playVideo(video, { muted, loop }) {
-  const screen = video.closest('.phone-screen');
+  const screen = video.closest('.phone-screen, .ugc-media');
   portfolioVideos.forEach(v => { if (v !== video) resetVideo(v); });
   if (!video.src && video.dataset.src) video.src = video.dataset.src;
   video.muted = muted;
@@ -104,7 +104,7 @@ function playVideo(video, { muted, loop }) {
 }
 
 portfolioVideos.forEach(video => {
-  const screen = video.closest('.phone-screen');
+  const screen = video.closest('.phone-screen, .ugc-media');
   const playBtn = screen.querySelector('.play-icon');
 
   // Tap = full experience: unmuted, plays once, resets when done.
