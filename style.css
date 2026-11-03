@@ -336,11 +336,10 @@ button { font-family: inherit; }
 }
 
 /* ============ Why Me ============ */
-.why-me { padding: 5rem 0 4rem; background: var(--cream); }
+.why-me { padding: 2rem 0 1rem; background: var(--cream); }
 .why-me-grid {
   display: grid;
   gap: 1.5rem;
-  margin-bottom: 3.5rem;
 }
 .why-me-grid h2 { font-size: clamp(2rem, 5vw, 3rem); }
 .why-me-text p { color: #333; font-size: 1.15rem; line-height: 1.65; }
@@ -348,7 +347,8 @@ button { font-family: inherit; }
   .why-me-grid { grid-template-columns: 0.9fr 1.5fr; gap: 3rem; align-items: start; }
 }
 
-.storytelling-section { margin-top: 4rem; }
+/* ============ Visual Storytelling ============ */
+.storytelling { padding: 4.5rem 0 4rem; background: var(--cream); }
 
 /* Infinite auto-rotating category carousel — several cards visible at once,
    image + title below each (like the original cards), loops forever in both
@@ -586,8 +586,14 @@ button { font-family: inherit; }
   border-radius: 999px;
   padding: 0.2rem 0.65rem;
 }
-@media (min-width: 900px) {
-  .ugc-grid { grid-template-columns: repeat(4, 1fr); gap: 1.75rem; }
+@media (min-width: 640px) {
+  /* Flex-wrap so an uneven last row stays centred */
+  .ugc-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem 1.25rem; }
+  .ugc-card { flex: 0 0 calc((100% - 2 * 1.25rem) / 3); }
+}
+@media (min-width: 1000px) {
+  .ugc-grid { gap: 1.5rem; }
+  .ugc-card { flex-basis: calc((100% - 4 * 1.5rem) / 5); }
 }
 @media (max-width: 639px) {
   .ugc-grid {
@@ -761,8 +767,32 @@ button { font-family: inherit; }
   font-size: 0.85rem;
 }
 .stars { color: var(--gold-dark); letter-spacing: 0.15em; font-size: 0.9rem; margin: 0; }
-@media (min-width: 760px) {
-  .testimonial-grid { grid-template-columns: 1fr 1fr; }
+/* All testimonials sit in a single row: equal columns on tablet/desktop,
+   a swipeable row on phones (matching the video sections). */
+@media (min-width: 640px) {
+  .testimonial-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .quote-row { gap: 0.5rem; }
+  .laurel { width: 20px; height: 56px; }
+}
+@media (min-width: 1000px) {
+  .testimonial-grid { gap: 3rem; }
+  .laurel { width: 26px; height: 68px; }
+}
+@media (max-width: 639px) {
+  .testimonial-grid {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 -1.25rem;
+    padding: 0.5rem 1.25rem 1rem;
+  }
+  .testimonial-grid::-webkit-scrollbar { display: none; }
+  .testimonial-card { flex: 0 0 85%; scroll-snap-align: center; }
+  .feedback h2 { margin-bottom: 0.75rem; }
+  .feedback .swipe-hint { margin: 0 0 1.5rem; }
 }
 
 /* ============ About ============ */
